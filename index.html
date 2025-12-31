@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HNY</title>
+    <title>Happy New Year 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;400;900&family=Syncopate:wght@400;700&display=swap');
@@ -60,104 +60,118 @@
             align-items: center;
             z-index: 10;
             pointer-events: none;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 2rem;
-            padding: 3rem;
+            padding: 2.5rem;
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            max-width: 900px;
-            width: 100%;
+            max-width: 700px;
+            width: 90%;
+            pointer-events: auto;
+            max-height: 90vh;
+            overflow-y: auto;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        /* Message Button Styles */
+        .msg-btn {
+            position: relative;
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            pointer-events: auto;
+            margin-top: 2rem;
+        }
+
+        .msg-btn:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .notif-dot {
+            position: absolute;
+            top: -2px;
+            right: 10px;
+            width: 12px;
+            height: 12px;
+            background: #ff3e3e;
+            border-radius: 50%;
+            border: 2px solid #02040a;
+            box-shadow: 0 0 10px rgba(255, 62, 62, 0.5);
+        }
+
+        .hidden { display: none !important; }
 
         .top-label {
             font-family: 'Syncopate', sans-serif;
             font-size: 0.7rem;
-            letter-spacing: 0.8rem;
+            letter-spacing: 0.6rem;
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             opacity: 0.8;
         }
 
         .year-title {
-            font-size: clamp(4rem, 15vw, 10rem);
+            font-size: clamp(3.5rem, 12vw, 7rem);
             font-weight: 900;
-            line-height: 0.9;
-            letter-spacing: -4px;
+            line-height: 1;
+            letter-spacing: -2px;
             background: linear-gradient(180deg, #fff 40%, rgba(255,255,255,0.2) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 2rem;
+            margin-bottom: 0.5rem;
         }
 
-        .quote-container {
-            min-height: 100px;
-            margin-bottom: 3rem;
-        }
-
-        .quote-text {
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
+        .message-body {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
             font-weight: 300;
-            color: #cbd5e1;
-            line-height: 1.6;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+            text-align: center;
+            margin-top: 1.5rem;
         }
 
-        .quote-text.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .timer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .timer-item {
-            display: flex;
-            flex-direction: column;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 1rem;
-        }
-
-        .timer-val {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #fff;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .timer-label {
-            font-size: 0.6rem;
+        .back-btn {
+            margin-top: 2rem;
+            opacity: 0.6;
+            font-size: 0.8rem;
+            text-decoration: underline;
+            cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--accent);
-            margin-top: 4px;
         }
 
+        .back-btn:hover { opacity: 1; }
+
         .footer-note {
-            margin-top: 3rem;
             font-size: 0.7rem;
-            letter-spacing: 3px;
-            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.4);
             text-transform: uppercase;
+            font-weight: 400;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
         }
 
         .interaction-hint {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             font-size: 0.6rem;
             letter-spacing: 4px;
             color: var(--accent);
@@ -171,11 +185,8 @@
             50% { opacity: 0.7; }
         }
 
-        @media (max-width: 640px) {
-            .glass-card { padding: 2rem 1rem; }
-            .timer-grid { gap: 0.5rem; }
-            .timer-val { font-size: 1.2rem; }
-        }
+        .glass-card::-webkit-scrollbar { width: 4px; }
+        .glass-card::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -184,67 +195,55 @@
     <canvas id="canvas"></canvas>
 
     <div class="ui-layer">
-        <div class="glass-card">
+        <div class="glass-card" id="mainCard">
             <div class="top-label">Entering the Future</div>
             <h1 class="year-title">2026</h1>
             
-            <div class="quote-container">
-                <p id="quote" class="quote-text"></p>
+            <!-- Default View -->
+            <div id="defaultView">
+                <button class="msg-btn" onclick="openMessage()">
+                    Check Message
+                    <div class="notif-dot" id="notifDot"></div>
+                </button>
             </div>
 
-            <div class="timer-grid">
-                <div class="timer-item">
-                    <span class="timer-val" id="d">00</span>
-                    <span class="timer-label">Days</span>
+            <!-- Message View -->
+            <div id="messageView" class="hidden">
+                <div class="message-body">
+                    <p>Hey everyone, wishing you all a very Happy New Year!</p>
+                    <p>If I made any mistakes last year, please be kind… it’s my first time on this world 😁.</p>
+                    <p>Jokes aside, I genuinely try to keep the people around me happy and spread good vibes wherever I can. I hope this new year brings you peace, smiles, success, and moments worth remembering.</p>
+                    <p>May God bless you with everything you wish for and everything you truly deserve (except my destruction, obviously 😁).</p>
+                    <p>Here’s to a fresh start, positive energy, and a beautiful year ahead for all of us.</p>
                 </div>
-                <div class="timer-item">
-                    <span class="timer-val" id="h">00</span>
-                    <span class="timer-label">Hrs</span>
-                </div>
-                <div class="timer-item">
-                    <span class="timer-val" id="m">00</span>
-                    <span class="timer-label">Min</span>
-                </div>
-                <div class="timer-item">
-                    <span class="timer-val" id="s">00</span>
-                    <span class="timer-label">Sec</span>
-                </div>
+                <div class="back-btn" onclick="closeMessage()">Go Back</div>
             </div>
 
             <p class="footer-note">Family • Friends • Neighbors</p>
         </div>
         
-        <div class="interaction-hint">Tap to ignite the sky</div>
+        <div class="interaction-hint">Tap anywhere to celebrate</div>
     </div>
 
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         
-        const quotes = [
-            "\"Dream big, start small, but start today.\"",
-            "\"Every ending is a chance to begin again.\"",
-            "\"Turn your goals into plans and your plans into reality.\"",
-            "\"Let this year shape the best version of you.\"",
-            "\"Your journey matters more than your speed.\"",
-            "\"Believe in progress, not perfection.\"",
-            "\"This year is your blank canvas.\"",
-            "\"Create a future you will be proud of.\"",
-            "\"Small steps today, big wins tomorrow.\"",
-            "\"Let hope guide every decision you make.\"",
-            "\"Your mindset decides your direction.\"",
-            "\"Consistency will take you where motivation cannot.\"",
-            "\"Make peace with patience and keep moving.\"",
-            "\"New dreams deserve new efforts.\"",
-            "\"Trust the process, even when it’s slow.\"",
-            "\"Your potential is bigger than your fear.\"",
-            "\"Let courage be louder than doubt.\"",
-            "\"Progress is still progress, no matter how slow.\"",
-            "\"Build habits that build your dreams.\"",
-            "\"This year, choose growth over comfort.\""
+        // UI Logic
+        function openMessage() {
+            document.getElementById('defaultView').classList.add('hidden');
+            document.getElementById('messageView').classList.remove('hidden');
+            document.getElementById('notifDot').classList.add('hidden');
+            // Reset scroll position
+            document.getElementById('mainCard').scrollTop = 0;
+        }
 
-        ];
+        function closeMessage() {
+            document.getElementById('defaultView').classList.remove('hidden');
+            document.getElementById('messageView').classList.add('hidden');
+        }
 
+        // Firework Engine
         let width, height;
         let particles = [];
         let fireworks = [];
@@ -258,35 +257,25 @@
 
         class Particle {
             constructor(x, y, color) {
-                this.x = x;
-                this.y = y;
-                this.color = color;
+                this.x = x; this.y = y; this.color = color;
                 const angle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 6 + 1;
+                const speed = Math.random() * 5 + 1;
                 this.vx = Math.cos(angle) * speed;
                 this.vy = Math.sin(angle) * speed;
                 this.alpha = 1;
-                this.decay = Math.random() * 0.02 + 0.01;
-                this.gravity = 0.12;
+                this.decay = Math.random() * 0.015 + 0.005;
+                this.gravity = 0.08;
             }
-
             update() {
-                this.vx *= 0.96;
-                this.vy *= 0.96;
-                this.vy += this.gravity;
-                this.x += this.vx;
-                this.y += this.vy;
-                this.alpha -= this.decay;
+                this.vx *= 0.97; this.vy *= 0.97; this.vy += this.gravity;
+                this.x += this.vx; this.y += this.vy; this.alpha -= this.decay;
             }
-
             draw() {
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 5;
-                ctx.shadowColor = this.color;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+                ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.restore();
             }
@@ -296,97 +285,51 @@
             constructor(tx, ty) {
                 this.x = tx || Math.random() * width;
                 this.y = height;
-                this.targetY = ty || Math.random() * (height * 0.4) + 50;
-                this.speed = 10;
-                this.color = `hsl(${Math.random() * 60 + 170}, 100%, 70%)`; // Cyan/Purple range
+                this.targetY = ty || Math.random() * (height * 0.5) + 50;
+                this.speed = 12;
+                this.color = `hsl(${Math.random() * 360}, 80%, 60%)`; 
                 this.dead = false;
             }
-
             update() {
                 this.y -= this.speed;
-                if (this.y <= this.targetY) {
-                    this.explode();
-                    this.dead = true;
-                }
+                if (this.y <= this.targetY) { this.explode(); this.dead = true; }
             }
-
             draw() {
                 ctx.fillStyle = this.color;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
                 ctx.fill();
-                // Trail
-                ctx.fillStyle = 'rgba(255,255,255,0.1)';
-                ctx.fillRect(this.x - 1, this.y, 2, 10);
             }
-
             explode() {
-                for (let i = 0; i < 80; i++) {
-                    particles.push(new Particle(this.x, this.y, this.color));
-                }
+                for (let i = 0; i < 100; i++) particles.push(new Particle(this.x, this.y, this.color));
             }
         }
 
         function animate() {
-            ctx.fillStyle = 'rgba(2, 4, 10, 0.2)';
+            ctx.fillStyle = 'rgba(2, 4, 10, 0.15)';
             ctx.fillRect(0, 0, width, height);
-
             if (Math.random() < 0.04) fireworks.push(new Firework());
-
             fireworks.forEach((fw, i) => {
-                fw.update();
-                fw.draw();
+                fw.update(); fw.draw();
                 if (fw.dead) fireworks.splice(i, 1);
             });
-
             particles.forEach((p, i) => {
-                p.update();
-                p.draw();
+                p.update(); p.draw();
                 if (p.alpha <= 0) particles.splice(i, 1);
             });
-
             requestAnimationFrame(animate);
         }
 
-        window.addEventListener('mousedown', (e) => fireworks.push(new Firework(e.clientX, e.clientY)));
+        window.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.glass-card')) return;
+            fireworks.push(new Firework(e.clientX, e.clientY));
+        });
+        window.addEventListener('touchstart', (e) => {
+            if (e.target.closest('.glass-card')) return;
+            const touch = e.touches[0];
+            fireworks.push(new Firework(touch.clientX, touch.clientY));
+        });
 
-        // Logic
-        let quoteIdx = 0;
-        function cycleQuote() {
-            const el = document.getElementById('quote');
-            el.classList.remove('active');
-            setTimeout(() => {
-                el.innerText = quotes[quoteIdx];
-                el.classList.add('active');
-                quoteIdx = (quoteIdx + 1) % quotes.length;
-            }, 1000);
-        }
-
-        function updateTimer() {
-            const target = new Date('January 1, 2026 00:00:00').getTime();
-            const now = new Date().getTime();
-            const diff = target - now;
-
-            if (diff <= 0) {
-                document.querySelector('.timer-grid').innerHTML = "<span class='col-span-4 text-white text-xl tracking-[10px]'>CELEBRATE 2026</span>";
-                return;
-            }
-
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('d').innerText = String(d).padStart(2, '0');
-            document.getElementById('h').innerText = String(h).padStart(2, '0');
-            document.getElementById('m').innerText = String(m).padStart(2, '0');
-            document.getElementById('s').innerText = String(s).padStart(2, '0');
-        }
-
-        setInterval(updateTimer, 1000);
-        setInterval(cycleQuote, 8000);
-        cycleQuote();
-        updateTimer();
         animate();
     </script>
 </body>
